@@ -17,7 +17,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install fastmcp==4.0.3 openai==3.16.12 python-dotenv==1.2.3
+        pip install fastmcp==4.0.3 openai==3.16.2 python-dotenv==1.2.3
         pip install pylint
     - name: Analysing the code with pylint
       run: |
