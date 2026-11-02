@@ -1,4 +1,6 @@
-# fastmcp run server.py:mcp --transport http --port 8000 OR python server.py
+''' 
+To run fastmcp run server.py:mcp --transport http --port 8000 OR python server.py
+'''
 import os
 import logging
 from dotenv import load_dotenv
@@ -21,7 +23,7 @@ def greet(name: str = "Jane Doe") -> str:
                     base_url=OPENAI_BASE_URL,
                     api_key=OPENAI_API_KEY  # Docker Model Runner doesn't require an API key!
                 )
-        
+
     response = client.chat.completions.create(
         model=OPENAI_MODEL,
         messages=[
@@ -43,7 +45,7 @@ def compose_haiku(topic: str = "the sun") -> str:
                     base_url=OPENAI_BASE_URL,
                     api_key=OPENAI_API_KEY
                 )
-        
+
     response = client.chat.completions.create(
         model=OPENAI_MODEL,
         messages=[
@@ -58,6 +60,7 @@ def compose_haiku(topic: str = "the sun") -> str:
     return haiku
 
 if __name__ == "__main__":
-    mcp.run(transport="http", host=os.getenv("MCP_SERVER_HOST"), port=int(os.getenv("MCP_SERVER_PORT")))
-
-    
+    mcp.run(transport="http",
+            host=os.getenv("MCP_SERVER_HOST"),
+            port=int(os.getenv("MCP_SERVER_PORT"))
+        )

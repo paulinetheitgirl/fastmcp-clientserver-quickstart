@@ -1,4 +1,6 @@
-# python client.py
+'''
+To run: python client.py
+'''
 import os
 import asyncio
 import logging
@@ -30,8 +32,9 @@ async def main():
             logger.debug(tool.input_schema)
 
         selected_tool = ""
-        while (not selected_tool in tool_names):
-            # Simple guardrail. See https://www.digitalocean.com/resources/articles/what-are-llm-guardrails
+        while selected_tool not in tool_names:
+            # Simple guardrail. 
+            # See https://www.digitalocean.com/resources/articles/what-are-llm-guardrails
             # Rule-based filtering: List of blocked words/phrases
             blocked_patterns = [r"ignore all previous instructions", r"bypass security"]
             # Apply regex checks to detect harmful queries
@@ -41,8 +44,8 @@ async def main():
 
             if (selected_tool or "").lower() == "exit":
                 return # using "break" would make the flow go to the call_tool() below
-            else:
-                selected_tool = input("Call which tool? (Type exit to end) ")
+            
+            selected_tool = input("Call which tool? (Type exit to end) ")
 
         await call_tool(selected_tool)
 
