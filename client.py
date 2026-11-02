@@ -17,11 +17,17 @@ MCP_SERVER_PORT = os.getenv("MCP_SERVER_PORT")
 mcp_client = Client(f"http://{MCP_SERVER_HOST}:{MCP_SERVER_PORT}/mcp", cache=True)
 
 async def call_tool(tool_name: str):
+    '''
+    Call MCP tool by name
+    '''
     async with mcp_client:
         result = await mcp_client.call_tool(tool_name)
         print(result.data)
 
 async def main():
+    '''
+    List MCP tool names
+    '''
     tool_names = set()
     async with mcp_client:
         all_tools = await mcp_client.list_tools()
@@ -33,7 +39,7 @@ async def main():
 
         selected_tool = ""
         while selected_tool not in tool_names:
-            # Simple guardrail. 
+            # Simple guardrail.
             # See https://www.digitalocean.com/resources/articles/what-are-llm-guardrails
             # Rule-based filtering: List of blocked words/phrases
             blocked_patterns = [r"ignore all previous instructions", r"bypass security"]
@@ -44,7 +50,7 @@ async def main():
 
             if (selected_tool or "").lower() == "exit":
                 return # using "break" would make the flow go to the call_tool() below
-            
+
             selected_tool = input("Call which tool? (Type exit to end) ")
 
         await call_tool(selected_tool)

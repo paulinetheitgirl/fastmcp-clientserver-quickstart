@@ -13,6 +13,6 @@ This sample assumes that you are connecting to an OpenAI model. (Should also wor
 For other supported APIs and SDKs, see the official [FastMCP docs](https://gofastmcp.com/integrations/openai).
 
 ## Setup
-1. Set the values your `.env` file with the keys shown in the example file
+1. Set the values in your `.env` file with the keys shown in the example file
 2. Start the server with `fastmcp run server.py:mcp --transport http --port 8000`
 3. Run the client with `python client.py`
